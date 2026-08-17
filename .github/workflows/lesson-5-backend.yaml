@@ -12,7 +12,7 @@ jobs:
         working-directory: backend
     name: Execute the PyCharm security test
     steps:
-      - uses: actions/chackout@v4
+      - uses: actions/checkout@v4
       - name: PyCharm Python Security Scanner
         uses: tonybaloney/pycharm-security@1.25.1      
   build_and_test:
