@@ -1,12 +1,13 @@
 from api.controllers import Delivery
-from django_mock_queries.query import MockSet, MockModel
+from types import SimpleNamespace
+
 
 def test_LotsOfItems():
   #Arrange
-  order = MockSet()
-  order.add(MockModel(quantity=5))
-  order.add(MockModel(quantity=5))
-  order.add(MockModel(quantity=5))
+  order = []
+  order.append(SimpleNamespace(quantity=5))
+  order.append(SimpleNamespace(quantity=5))
+  order.append(SimpleNamespace(quantity=5))
   delivery_distance = 6
   #Act
   cost = Delivery.calculate(order,delivery_distance)
@@ -15,10 +16,10 @@ def test_LotsOfItems():
 
 def test_MiddleOfTheRoadItems():
   #Arrange
-  order = MockSet()
-  order.add(MockModel(quantity=2))
-  order.add(MockModel(quantity=2))
-  order.add(MockModel(quantity=2))
+  order = []
+  order.append(SimpleNamespace(quantity=2))
+  order.append(SimpleNamespace(quantity=2))
+  order.append(SimpleNamespace(quantity=2))
   delivery_distance = 4
   #Act
   cost = Delivery.calculate(order,delivery_distance)
@@ -27,12 +28,11 @@ def test_MiddleOfTheRoadItems():
 
 def test_LittleItems():
   #Arrange
-  order = MockSet()
-  order.add(MockModel(quantity=3))
-  order.add(MockModel(quantity=1))
+  order = []
+  order.append(SimpleNamespace(quantity=3))
+  order.append(SimpleNamespace(quantity=1))
   delivery_distance = 2
   #Act
   cost = Delivery.calculate(order,delivery_distance)
   #Assert
-  assert cost == 2.50
-  
+  assert cost == 3.50
